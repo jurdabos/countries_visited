@@ -1,0 +1,71 @@
+# Alembic caches
+alembic/versions/__pycache__/
+
+# Generated files or build outputs
+*.egg
+*.egg-info/
+.eggs/
+.installed.cfg
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+
+# Model files and large data files
+*.csv
+*.h5
+#*.json
+*.pkl
+.junie/
+
+# Project specific
+data/
+logs/
+.cache
+
+# Python bytecode and cache files
+*$py.class
+*.py[cod]
+*.pyc
+*.pyo
+*.so
+.Python
+__pycache__/
+
+# System-specific files
+*.log
+.DS_Store
+Thumbs.db
+
+# Temporary or editor-specific files
+*.bak
+*.code-workspace
+*.swo
+*.swp
+*.tmp
+.idea/
+.vscode/
+
+# Testing
+.coverage
+.hypothesis/
+.pytest_cache/
+htmlcov/
+
+# Virtual environments
+*.key
+*.pem
+.env
+.env/
+.venv
+.venv/
+ENV/
+env/
+venv/
