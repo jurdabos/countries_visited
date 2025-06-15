@@ -47,10 +47,10 @@ class TestAppUtils:
             ]
         }
         mock_json_load.return_value = mock_json_data
-        
+
         # Call the function
         geo_data, countries = app.load_country_data()
-        
+
         # Verify results
         assert geo_data == mock_json_data
         assert len(countries) == 2
@@ -58,7 +58,7 @@ class TestAppUtils:
         assert "CA" in countries
         assert countries["US"] == "United States"
         assert countries["CA"] == "Canada"
-        
+
         # Verify open was called with the correct path
         mock_open.assert_called_once()
         args, _ = mock_open.call_args
@@ -69,15 +69,22 @@ class TestAppUtils:
         """Test loading color palettes."""
         # Mock the palettes data
         mock_palettes = {
-            "Test Palette": ["#FF0000", "#00FF00", "#0000FF"]
+            "Test Palette": ["#FF0000", "#00FF00", "#0000FF"],
+            "_color_info": {
+                "#FF0000": "Red",
+                "#00FF00": "Green",
+                "#0000FF": "Blue"
+            }
         }
         mock_get_palettes.return_value = mock_palettes
-        
+
         # Call the function
         palettes = app.load_palettes()
-        
+
         # Verify results
         assert palettes == mock_palettes
+        assert "_color_info" in palettes
+        assert palettes["_color_info"]["#FF0000"] == "Red"
         mock_get_palettes.assert_called_once()
 
     def test_build_map(self, mock_countries_geojson):
@@ -85,7 +92,7 @@ class TestAppUtils:
         # Load mock GeoJSON data
         with open(mock_countries_geojson, 'r') as f:
             geo_data = json.load(f)
-        
+
         # Create mock player data
         players = {
             "player1": {
@@ -101,23 +108,23 @@ class TestAppUtils:
                 "visited": {"US", "CA"}
             }
         }
-        
+
         # Call the function
         m = app.build_map(players, geo_data)
-        
+
         # Verify the map was created
         assert isinstance(m, folium.Map)
-        
+
         # Check that the GeoJSON layer was added
         assert len(m._children) > 0
-        
+
         # Find the GeoJSON layer
         geojson_layer = None
         for _, child in m._children.items():
             if isinstance(child, folium.features.GeoJson):
                 geojson_layer = child
                 break
-        
+
         assert geojson_layer is not None
 
     @patch('streamlit.secrets.get')
@@ -129,15 +136,15 @@ class TestAppUtils:
             "OAUTH_CLIENT_SECRET": "test-client-secret",
             "OAUTH_REDIRECT_URI": "http://test-redirect-uri"
         }.get(key, default)
-        
+
         # Mock the OAuth2Component class
         with patch('app.OAuth2Component') as mock_oauth2_component:
             mock_oauth2_instance = MagicMock()
             mock_oauth2_component.return_value = mock_oauth2_instance
-            
+
             # Call the function
             oauth2 = app.setup_oauth()
-            
+
             # Verify OAuth2Component was created with correct parameters
             mock_oauth2_component.assert_called_once_with(
                 "test-client-id",
@@ -148,6 +155,6 @@ class TestAppUtils:
                 "https://oauth2.googleapis.com/revoke",
                 "http://test-redirect-uri"
             )
-            
+
             # Verify the function returned the OAuth2Component instance
             assert oauth2 == mock_oauth2_instance

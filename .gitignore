@@ -28,6 +28,7 @@ wheels/
 # Project specific
 data/
 logs/
+logs-jurdabos*
 .cache
 
 # Python bytecode and cache files

@@ -1,0 +1,37 @@
+# Streamlit Configuration
+# This file contains configuration settings for the Countries Visited application.
+
+[theme]
+# Primary accent color for interactive elements (Maya Blue)
+primaryColor = "#7ebce6"
+
+# Background color for the main content area (White)
+backgroundColor = "#ffffff"
+
+# Background color used for the sidebar and most interactive widgets (Light Caribbean Current)
+secondaryBackgroundColor = "#a9e3ef"
+
+# Color used for almost all text (Black)
+textColor = "#000000"
+
+# Font family for all text in the app, except code blocks
+font = "Lucida Sans Unicode"
+
+[server]
+# If false, will attempt to open a browser window on start
+headless = false
+
+# Enables support for Cross-Origin Resource Sharing (CORS) requests
+enableCORS = true
+
+# Port where the server will listen for browser connections
+port = 8502
+
+# Enables support for websocket compression
+enableWebsocketCompression = true
+
+[logger]
+# Level of logging: 'error', 'warning', 'info', or 'debug'
+level = "info"
+
+# Client and deprecation sections removed as they are no longer valid config options
