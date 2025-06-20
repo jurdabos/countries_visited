@@ -2,6 +2,7 @@ import os
 import sys
 from pathlib import Path
 
+
 def ensure_directories():
     """
     Ensure that all required directories exist for the Countries Visited Map application.
@@ -60,6 +61,7 @@ def ensure_directories():
     else:
         print(f"Note: HDF5 data file does not exist at: {hdf5_file}")
         print("This file will be created automatically when you run the app.")
+
 
 if __name__ == "__main__":
     ensure_directories()
